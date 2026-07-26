@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" fill="none">
+  <defs>
+    <!-- Deep space gradient background -->
+    <linearGradient id="spaceBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f"/>
+      <stop offset="50%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#0f1a2e"/>
+    </linearGradient>
+
+    <!-- Cyan-teal accent glow -->
+    <radialGradient id="glowTopRight" cx="0.85" cy="0.15" r="0.5">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowMid" cx="0.3" cy="0.55" r="0.4">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glass card gradient -->
+    <linearGradient id="glassCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="glassHighlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Teal accent bar -->
+    <linearGradient id="tealAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+
+    <!-- Chip backgrounds -->
+    <linearGradient id="chipBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0891b2" stop-opacity="0.08"/>
+    </linearGradient>
+
+    <filter id="glassBlur">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#spaceBg)"/>
+  <rect width="1200" height="600" fill="url(#glowTopRight)"/>
+  <rect width="1200" height="600" fill="url(#glowMid)"/>
+
+  <!-- Drifting light orbs (static positions for SVG) -->
+  <circle cx="200" cy="120" r="80" fill="#22d3ee" opacity="0.04"/>
+  <circle cx="950" cy="420" r="120" fill="#06b6d4" opacity="0.03"/>
+  <circle cx="600" cy="300" r="60" fill="#22d3ee" opacity="0.02"/>
+
+  <title>FitGuide · 健身动作指导 — 1324 个动作中英双语离线字典，深空液态玻璃美学</title>
+
+  <!-- Left: App identity -->
+  <g transform="translate(80, 100)">
+    <!-- Teal accent line -->
+    <rect x="0" y="0" width="4" height="120" rx="2" fill="url(#tealAccent)"/>
+
+    <!-- App icon placeholder: stylized dumbbell in glass -->
+    <g transform="translate(28, 12)">
+      <rect x="0" y="0" width="64" height="64" rx="16" fill="url(#glassCard)" stroke="#22d3ee" stroke-width="1" stroke-opacity="0.3"/>
+      <!-- Stylized dumbbell -->
+      <rect x="12" y="27" width="40" height="10" rx="3" fill="#22d3ee" opacity="0.7"/>
+      <rect x="8" y="20" width="8" height="24" rx="2" fill="#22d3ee" opacity="0.5"/>
+      <rect x="48" y="20" width="8" height="24" rx="2" fill="#22d3ee" opacity="0.5"/>
+    </g>
+
+    <!-- Title -->
+    <text x="108" y="38" font-family="SF Pro Display, PingFang SC, system-ui, sans-serif" font-size="48" font-weight="700" fill="#f0f4f8" letter-spacing="-0.5">FitGuide</text>
+    <text x="108" y="72" font-family="PingFang SC, SF Pro Text, system-ui, sans-serif" font-size="24" font-weight="500" fill="#94a3b8" letter-spacing="1">健身动作指导</text>
+
+    <!-- Stats row -->
+    <g transform="translate(108, 98)">
+      <rect x="0" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="39" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">1324 动作</text>
+
+      <rect x="88" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="127" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">中英双语</text>
+
+      <rect x="176" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="215" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">离线可用</text>
+
+      <rect x="264" y="0" width="64" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="296" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">iOS 18+</text>
+    </g>
+  </g>
+
+  <!-- Right: UI preview cards (simulated glass cards) -->
+  <g transform="translate(620, 60)">
+    <!-- Main card: Exercise detail preview -->
+    <rect x="0" y="0" width="500" height="480" rx="20" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+
+    <!-- Top highlight -->
+    <rect x="0" y="0" width="500" height="1" rx="0.5" fill="url(#glassHighlight)"/>
+
+    <!-- Card inner: exercise card mock -->
+    <!-- Thumbnail area -->
+    <rect x="24" y="24" width="88" height="88" rx="12" fill="#0f1a2e" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.2"/>
+    <!-- Dumbbell icon in thumbnail -->
+    <g transform="translate(44, 54)">
+      <line x1="0" y1="14" x2="48" y2="14" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+      <line x1="8" y1="4" x2="8" y2="24" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+      <line x1="40" y1="4" x2="40" y2="24" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+    </g>
+
+    <!-- Exercise name bilingual -->
+    <text x="130" y="48" font-family="PingFang SC, system-ui, sans-serif" font-size="20" font-weight="600" fill="#e2e8f0">杠铃卧推</text>
+    <text x="130" y="72" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="400" fill="#64748b" font-variant="small-caps">Barbell Bench Press</text>
+
+    <!-- Target muscle chip -->
+    <rect x="130" y="82" width="48" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="154" y="97" font-family="PingFang SC, system-ui, sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle">胸大肌</text>
+
+    <!-- Divider -->
+    <line x1="24" y1="140" x2="476" y2="140" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.06"/>
+
+    <!-- Bilingual steps preview -->
+    <g transform="translate(24, 156)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="11" y="15" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">1</text>
+      <text x="34" y="15" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">平躺在卧推凳上，双脚平踩地面</text>
+      <text x="34" y="34" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Lie flat on bench, feet flat on floor</text>
+
+      <!-- Step 2 -->
+      <rect x="0" y="52" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="11" y="67" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">2</text>
+      <text x="34" y="67" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">正握杠铃，双手略宽于肩</text>
+      <text x="34" y="86" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Grip bar with hands slightly wider than shoulders</text>
+
+      <!-- Step 3 -->
+      <rect x="0" y="104" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="11" y="119" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">3</text>
+      <text x="34" y="119" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">缓慢下放杠铃至胸部上方</text>
+      <text x="34" y="138" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Lower bar slowly to chest level</text>
+
+      <!-- Step 4 -->
+      <rect x="0" y="156" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="11" y="171" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">4</text>
+      <text x="34" y="171" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">推起杠铃至手臂伸直，顶峰收缩</text>
+      <text x="34" y="190" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Press bar up, squeeze at top</text>
+    </g>
+
+    <!-- Bottom metadata bar -->
+    <g transform="translate(24, 380)">
+      <!-- Equipment -->
+      <rect x="0" y="0" width="96" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
+      <text x="48" y="19" font-family="SF Pro Text, PingFang SC, system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">🏋️ 杠铃 Barbell</text>
+
+      <!-- Body part -->
+      <rect x="108" y="0" width="100" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
+      <text x="158" y="19" font-family="SF Pro Text, PingFang SC, system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">🦾 胸 Chest</text>
+
+      <!-- Attribution -->
+      <rect x="220" y="0" width="256" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
+      <text x="348" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">© Gym visual — gymvisual.com</text>
+    </g>
+
+    <!-- Tab bar at bottom of card -->
+    <g transform="translate(24, 432)">
+      <rect x="0" y="0" width="452" height="36" rx="18" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
+      <text x="70" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">动作</text>
+      <text x="190" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">训练</text>
+      <text x="310" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">收藏</text>
+      <text x="410" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">我的</text>
+    </g>
+  </g>
+</svg>
