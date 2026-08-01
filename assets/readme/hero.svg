@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="420" viewBox="0 0 1200 420"
+     role="img" aria-labelledby="title desc">
+  <title id="title">FitGuide：离线动作参考与训练记录</title>
+  <desc id="desc">深空 Liquid Glass 风格的 FitGuide 产品结构示意，展示双语动作卡片、逐组训练记录与休息计时。</desc>
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B2030"/>
+      <stop offset="0.54" stop-color="#071420"/>
+      <stop offset="1" stop-color="#020609"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1C3850" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#0A1422" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#48D7F2"/>
+      <stop offset="1" stop-color="#8E83FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="420" rx="30" fill="url(#background)"/>
+  <circle cx="1085" cy="52" r="220" fill="#48D7F2" opacity="0.075"/>
+  <circle cx="220" cy="438" r="220" fill="#7164FF" opacity="0.075"/>
+  <path d="M56 306H606M56 324H486" stroke="#A7C6D8" stroke-opacity="0.12"/>
+  <path d="M640 26V394" stroke="#A7C6D8" stroke-opacity="0.10"/>
+  <path d="M56 34H574" stroke="#A7C6D8" stroke-opacity="0.10"/>
+  <circle cx="598" cy="34" r="3" fill="#48D7F2"/>
+  <circle cx="622" cy="34" r="3" fill="#8E83FF" opacity="0.8"/>
+
+  <g id="title-block" transform="translate(64 50)">
+    <text x="0" y="20" fill="#48D7F2" font-size="18" font-weight="700"
+          letter-spacing="2.2" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+      IOS / OFFLINE TRAINING COMPANION
+    </text>
+    <text x="0" y="92" fill="#F6F8FB" font-size="68" font-weight="750"
+          letter-spacing="-1.8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+      FitGuide
+    </text>
+    <text x="0" y="138" fill="#F6F8FB" font-size="29" font-weight="650"
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+      从动作参考，到完整训练记录。
+    </text>
+    <text x="0" y="176" fill="#A0B1C9" font-size="21" font-weight="500"
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+      1324 个动作 · 中英并排 · 训练闭环
+    </text>
+
+    <g transform="translate(0 207)">
+      <rect x="0" y="0" width="102" height="36" rx="18" fill="#153247" stroke="#48D7F2" stroke-opacity="0.42"/>
+      <text x="51" y="24" text-anchor="middle" fill="#D7F7FF" font-size="17" font-weight="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">iOS 18+</text>
+      <rect x="114" y="0" width="194" height="36" rx="18" fill="#122338" stroke="#89A1C0" stroke-opacity="0.34"/>
+      <text x="211" y="24" text-anchor="middle" fill="#C2D1E5" font-size="17" font-weight="550" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">SwiftUI + SwiftData</text>
+      <rect x="320" y="0" width="78" height="36" rx="18" fill="#211F46" stroke="#8E83FF" stroke-opacity="0.55"/>
+      <text x="359" y="24" text-anchor="middle" fill="#E5E1FF" font-size="17" font-weight="650" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">v2.0</text>
+    </g>
+
+    <g transform="translate(0 285)">
+      <circle cx="8" cy="0" r="5" fill="#48D7F2"/>
+      <text x="24" y="6" fill="#C7D8E7" font-size="16" font-weight="650" letter-spacing="1.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">BROWSE</text>
+      <path d="M110 0H148" stroke="#6A8CA6" stroke-opacity="0.62"/>
+      <circle cx="158" cy="0" r="5" fill="#6EA7FF"/>
+      <text x="174" y="6" fill="#C7D8E7" font-size="16" font-weight="650" letter-spacing="1.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">PLAN</text>
+      <path d="M238 0H276" stroke="#6A8CA6" stroke-opacity="0.62"/>
+      <circle cx="286" cy="0" r="5" fill="#8E83FF"/>
+      <text x="302" y="6" fill="#C7D8E7" font-size="16" font-weight="650" letter-spacing="1.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">LOG</text>
+      <path d="M354 0H392" stroke="#6A8CA6" stroke-opacity="0.62"/>
+      <circle cx="402" cy="0" r="5" fill="#48D7F2"/>
+      <text x="418" y="6" fill="#C7D8E7" font-size="16" font-weight="650" letter-spacing="1.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">REVIEW</text>
+    </g>
+  </g>
+
+  <g id="product-proof" transform="translate(694 38)">
+    <rect x="0" y="0" width="452" height="344" rx="28" fill="url(#glass)" stroke="#8DB6D4" stroke-opacity="0.42"/>
+    <rect x="18" y="18" width="416" height="308" rx="22" fill="#08121F" fill-opacity="0.66" stroke="#B2D6E6" stroke-opacity="0.12"/>
+
+    <g transform="translate(40 34)">
+      <circle cx="10" cy="10" r="10" fill="url(#accent)"/>
+      <path d="M4 10H16M10 4V16" stroke="#041017" stroke-width="2" stroke-linecap="round"/>
+      <text x="30" y="16" fill="#F6F8FB" font-size="20" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">FitGuide</text>
+      <rect x="280" y="-2" width="100" height="26" rx="13" fill="#143346"/>
+      <circle cx="295" cy="11" r="4" fill="#48D7F2"/>
+      <text x="309" y="16" fill="#BDECF7" font-size="14" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">离线可用</text>
+    </g>
+
+    <path d="M40 82H412" stroke="#A8C8D9" stroke-opacity="0.16"/>
+    <g transform="translate(40 96)">
+      <text x="0" y="16" fill="#F6F8FB" font-size="18" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">动作</text>
+      <text x="58" y="16" fill="#7188A1" font-size="17" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">训练</text>
+      <text x="116" y="16" fill="#7188A1" font-size="17" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">我的</text>
+      <rect x="0" y="29" width="42" height="3" rx="1.5" fill="#48D7F2"/>
+      <text x="238" y="16" fill="#87A2BB" font-size="14" font-weight="600" letter-spacing="1.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">FLOW / 结构示意</text>
+    </g>
+
+    <g transform="translate(40 138)">
+      <rect x="0" y="0" width="372" height="84" rx="20" fill="#142A40" stroke="#9AC6D9" stroke-opacity="0.2"/>
+      <circle cx="42" cy="42" r="25" fill="#0C1D2F" stroke="#48D7F2" stroke-opacity="0.55"/>
+      <g transform="translate(25 41) rotate(-22)">
+        <rect x="0" y="-3" width="34" height="6" rx="3" fill="#D4F8FF"/>
+        <rect x="-8" y="-11" width="6" height="22" rx="2" fill="#48D7F2"/>
+        <rect x="-15" y="-8" width="5" height="16" rx="2" fill="#79E5F5"/>
+        <rect x="36" y="-11" width="6" height="22" rx="2" fill="#48D7F2"/>
+        <rect x="43" y="-8" width="5" height="16" rx="2" fill="#79E5F5"/>
+      </g>
+      <text x="84" y="32" fill="#F6F8FB" font-size="22" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">杠铃卧推</text>
+      <text x="84" y="57" fill="#9FB0CA" font-size="16" font-weight="550" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">Barbell Bench Press</text>
+      <rect x="282" y="26" width="72" height="28" rx="14" fill="#203B50"/>
+      <text x="318" y="45" text-anchor="middle" fill="#BDECF7" font-size="14" font-weight="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">胸 / CHEST</text>
+    </g>
+
+    <g transform="translate(40 238)">
+      <rect x="0" y="0" width="178" height="72" rx="18" fill="#10253A" stroke="#81B8CD" stroke-opacity="0.24"/>
+      <text x="16" y="22" fill="#A8C1D1" font-size="15" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">训练中</text>
+      <text x="16" y="45" fill="#48D7F2" font-size="16" font-weight="700" letter-spacing="0.7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">SET 02 / 03</text>
+      <text x="136" y="48" fill="#F6F8FB" font-size="24" font-weight="750" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">12</text>
+      <text x="151" y="60" fill="#7F96AB" font-size="11" font-weight="650" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">REPS</text>
+
+      <rect x="194" y="0" width="178" height="72" rx="18" fill="#0D1A2A" stroke="#9C8FFF" stroke-opacity="0.24"/>
+      <text x="210" y="22" fill="#A8C1D1" font-size="15" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">休息</text>
+      <text x="210" y="52" fill="#F6F8FB" font-size="31" font-weight="750" letter-spacing="-0.8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">01:30</text>
+      <text x="326" y="22" fill="#C3BFFF" font-size="13" font-weight="650" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">+15s</text>
+      <text x="326" y="61" fill="#7F96AB" font-size="13" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">跳过</text>
+    </g>
+
+    <g transform="translate(40 322)">
+      <circle cx="10" cy="0" r="4" fill="#48D7F2"/>
+      <circle cx="178" cy="0" r="4" fill="#7188A1"/>
+      <circle cx="346" cy="0" r="4" fill="#7188A1"/>
+      <path d="M28 0H160M196 0H328" stroke="#7191A9" stroke-opacity="0.35"/>
+    </g>
+  </g>
+</svg>
