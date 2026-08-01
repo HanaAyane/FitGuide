@@ -26,8 +26,9 @@ struct PlanPickerSheet: View {
                                 let already = library.containsInPlan(plan, exerciseId: exerciseId)
                                 Button {
                                     guard !already else { return }
-                                    library.addToPlan(plan, exerciseId: exerciseId)
-                                    dismiss()
+                                    if library.addToPlan(plan, exerciseId: exerciseId) {
+                                        dismiss()
+                                    }
                                 } label: {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
@@ -62,20 +63,20 @@ struct PlanPickerSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("取消", action: { dismiss() })
+                    Button("取消 Cancel", action: { dismiss() })
                         .foregroundColor(.textSecondary)
                 }
             }
             .alert("新建计划 New Plan", isPresented: $showCreate) {
-                TextField("名称", text: $newName)
-                Button("取消", role: .cancel) { newName = "" }
-                Button("创建并加入", action: {
+                TextField("名称 Name", text: $newName)
+                Button("取消 Cancel", role: .cancel) { newName = "" }
+                Button("创建并加入 Create & Add", action: {
                     let name = newName.trimmingCharacters(in: .whitespaces)
                     if !name.isEmpty {
-                        let plan = library.addPlan(named: name)
-                        library.addToPlan(plan, exerciseId: exerciseId)
-                        newName = ""
-                        dismiss()
+                        if library.createPlan(named: name, adding: exerciseId) {
+                            newName = ""
+                            dismiss()
+                        }
                     }
                 })
             }

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var store: ExerciseStore
-    @State private var loaded = false
 
     var body: some View {
         ZStack {
@@ -26,7 +25,7 @@ struct RootView: View {
             } else {
                 MainTabView()
                     .transition(.opacity)
-}
+            }
         }
     }
 }

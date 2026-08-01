@@ -20,6 +20,9 @@ targets:
   FitGuide:
     type: application
     platform: iOS
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1"
     sources:
       - path: FitGuide
         excludes:
@@ -33,19 +36,53 @@ targets:
       - path: ../exercises-dataset/videos
         type: folder
         buildPhase: resources
+    dependencies:
+      - target: FitGuideLiveActivity
+        embed: true
     info:
       path: FitGuide/Info.plist
       properties:
         CFBundleDisplayName: FitGuide
         CFBundleName: FitGuide
-        CFBundleShortVersionString: "1.0"
-        CFBundleVersion: "1"
+        CFBundleShortVersionString: "2.0"
+        CFBundleVersion: "2"
+        UIRequiresFullScreen: true
+        NSSupportsLiveActivities: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
         UILaunchScreen: {}
+  FitGuideLiveActivity:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: FitGuideLiveActivity
+        excludes:
+          - Info.plist
+      - path: FitGuide/Shared/WorkoutLiveActivityAttributes.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.fitguide.FitGuide.LiveActivity
+        INFOPLIST_FILE: FitGuideLiveActivity/Info.plist
+        SKIP_INSTALL: YES
   FitGuideTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: FitGuideTests
+        excludes:
+          - Fixtures
+      - path: FitGuideTests/Fixtures
+        buildPhase: resources
+    dependencies:
+      - target: FitGuide
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "YES"
+  FitGuideUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: FitGuideUITests
     dependencies:
       - target: FitGuide
     settings:
