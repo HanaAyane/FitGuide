@@ -7,6 +7,12 @@ final class ExerciseStore: ObservableObject {
     @Published private(set) var exercises: [Exercise] = []
     @Published private(set) var byBodyPart: [String: [Exercise]] = [:]
     @Published private(set) var bodyParts: [String] = []
+    @Published private(set) var isLoading = true
+    @Published private(set) var loadErrorMessage: String?
+
+    var isReady: Bool {
+        !isLoading && !exercises.isEmpty
+    }
 
     private let log = Logger(subsystem: "com.local.fitguide", category: "ExerciseStore")
 
@@ -15,9 +21,14 @@ final class ExerciseStore: ObservableObject {
     }
 
     func load() async {
+        isLoading = true
+        loadErrorMessage = nil
+        defer { isLoading = false }
+
         guard let url = Bundle.main.url(forResource: "exercises", withExtension: "json", subdirectory: "data") ?? Bundle.main.url(forResource: "exercises", withExtension: "json") else {
-            log.error("exercises.json not found in bundle")
-            assertionFailure("exercises.json not found in bundle")
+            let message = "动作库资源缺失，请重新安装应用。 Exercise catalog is unavailable; reinstall the app."
+            loadErrorMessage = message
+            log.error("\(message, privacy: .public)")
             return
         }
         do {
@@ -33,8 +44,9 @@ final class ExerciseStore: ObservableObject {
             }
             log.info("loaded \(decoded.count) exercises, \(self.bodyParts.count) body parts")
         } catch {
-            log.error("Failed to decode exercises.json: \(String(describing: error))")
-            assertionFailure("Failed to decode exercises.json: \(error)")
+            let message = "动作库加载失败，请重新启动应用。 Exercise catalog failed to load; restart the app."
+            loadErrorMessage = message
+            log.error("\(message, privacy: .public): \(String(describing: error), privacy: .public)")
         }
     }
 

@@ -1,10 +1,19 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selection: Tab = .exercises
+    @EnvironmentObject private var library: LibraryStore
+    @EnvironmentObject private var workoutStore: ActiveWorkoutStore
+    @State private var selection: Tab
 
     enum Tab: Hashable {
-        case exercises, plans, favorites, profile
+        case exercises, plans, profile
+    }
+
+    init() {
+        let startsOnTraining = ProcessInfo.processInfo.arguments.contains(
+            "--ui-testing-training-tab"
+        )
+        _selection = State(initialValue: startsOnTraining ? .plans : .exercises)
     }
 
     var body: some View {
@@ -25,6 +34,7 @@ struct MainTabView: View {
                 .tag(Tab.exercises)
 
             PlansView()
+                .accessibilityIdentifier("screen.training")
                 .tabItem {
                     Label {
                         VStack(alignment: .leading, spacing: 0) {
@@ -38,21 +48,6 @@ struct MainTabView: View {
                     }
                 }
                 .tag(Tab.plans)
-
-            FavoritesTabView()
-                .tabItem {
-                    Label {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("收藏")
-                            Text("Favorites")
-                                .font(.caption2.smallCaps())
-                                .opacity(0.7)
-                        }
-                    } icon: {
-                        Image(systemName: "bookmark")
-                    }
-                }
-                .tag(Tab.favorites)
 
             ProfileTabView()
                 .tabItem {
@@ -70,5 +65,31 @@ struct MainTabView: View {
                 .tag(Tab.profile)
         }
         .tint(.accentColor)
+        .alert(
+            "无法保存数据 · Unable to save data",
+            isPresented: Binding(
+                get: {
+                    library.lastErrorMessage != nil
+                        || workoutStore.lastErrorMessage != nil
+                },
+                set: {
+                    if !$0 {
+                        library.clearError()
+                        workoutStore.clearError()
+                    }
+                }
+            )
+        ) {
+            Button("好 OK", role: .cancel) {
+                library.clearError()
+                workoutStore.clearError()
+            }
+        } message: {
+            Text(
+                workoutStore.lastErrorMessage
+                    ?? library.lastErrorMessage
+                    ?? "未知错误 Unknown error"
+            )
+        }
     }
 }
