@@ -266,6 +266,8 @@ final class FitGuideUITests: XCTestCase {
     private func finishWorkout() {
         app.buttons["workout.sessionMenu"].tap()
         app.buttons["结束训练 Finish"].tap()
-        app.buttons["结束训练 Finish Workout"].tap()
+        let confirmation = app.buttons["结束训练 Finish Workout"]
+        XCTAssertTrue(confirmation.waitForExistence(timeout: 8))
+        confirmation.tap()
     }
 }
