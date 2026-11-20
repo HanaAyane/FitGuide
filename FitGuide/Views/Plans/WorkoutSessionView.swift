@@ -577,7 +577,7 @@ private struct RestTimerOverlay: View {
                             Text(nextSetDescription)
                                 .font(.caption)
                                 .foregroundColor(.textSecondary)
-                                .lineLimit(3)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier("workout.rest.next")
                         }
                         Spacer(minLength: 0)
