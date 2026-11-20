@@ -1,173 +1,144 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="468" viewBox="0 0 1200 468"
+     role="img" aria-labelledby="title desc" xml:lang="zh-Hans">
+  <title id="title">FitGuide · 健身动作指导</title>
+  <desc id="desc">1324 个离线动作，提供中英对照步骤。右侧为原创哑铃深蹲动作分解插画。</desc>
+
   <defs>
-    <!-- Deep space gradient background -->
-    <linearGradient id="spaceBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a0a0f"/>
-      <stop offset="50%" stop-color="#0d1117"/>
-      <stop offset="100%" stop-color="#0f1a2e"/>
-    </linearGradient>
-
-    <!-- Cyan-teal accent glow -->
-    <radialGradient id="glowTopRight" cx="0.85" cy="0.15" r="0.5">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+    <clipPath id="canvas"><rect width="1200" height="468" rx="28"/></clipPath>
+    <radialGradient id="spotlight" cx=".83" cy=".46" r=".59">
+      <stop stop-color="#1B4440"/>
+      <stop offset=".6" stop-color="#102326"/>
+      <stop offset="1" stop-color="#0B1218"/>
     </radialGradient>
-    <radialGradient id="glowMid" cx="0.3" cy="0.55" r="0.4">
-      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Glass card gradient -->
-    <linearGradient id="glassCard" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.07"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    <linearGradient id="shirt" x1=".68" y1="0" x2=".26" y2="1">
+      <stop stop-color="#A2F8DB"/>
+      <stop offset=".56" stop-color="#51D3B2"/>
+      <stop offset="1" stop-color="#237E73"/>
     </linearGradient>
-    <linearGradient id="glassHighlight" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
-      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.0"/>
+    <linearGradient id="shorts" x1="0" y1="0" x2=".9" y2="1">
+      <stop stop-color="#384B53"/>
+      <stop offset="1" stop-color="#17242D"/>
     </linearGradient>
-
-    <!-- Teal accent bar -->
-    <linearGradient id="tealAccent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#22d3ee"/>
-      <stop offset="100%" stop-color="#0891b2"/>
+    <linearGradient id="skin" x1=".66" y1="0" x2=".28" y2="1">
+      <stop stop-color="#FFD2B5"/>
+      <stop offset="1" stop-color="#B77560"/>
     </linearGradient>
-
-    <!-- Chip backgrounds -->
-    <linearGradient id="chipBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#0891b2" stop-opacity="0.08"/>
-    </linearGradient>
-
-    <filter id="glassBlur">
-      <feGaussianBlur stdDeviation="1.5"/>
-    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8"
+            refX="8" refY="5" orient="auto">
+      <path d="M1 1l7 4-7 4" fill="none" stroke="#80EBD2" stroke-width="1.3"/>
+    </marker>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="600" fill="url(#spaceBg)"/>
-  <rect width="1200" height="600" fill="url(#glowTopRight)"/>
-  <rect width="1200" height="600" fill="url(#glowMid)"/>
+  <g clip-path="url(#canvas)">
+    <rect width="1200" height="468" fill="url(#spotlight)"/>
+    <path d="M710 468 955 0h191L901 468z" fill="#80EBD2" opacity=".045"/>
+    <path d="M708 468 953 0m-179 468L1019 0m-101 468L1163 0" fill="none"
+          stroke="#97CFC4" opacity=".14"/>
+    <path d="M58 91h1084M58 389h1084" fill="none" stroke="#97CFC4" opacity=".25"/>
 
-  <!-- Drifting light orbs (static positions for SVG) -->
-  <circle cx="200" cy="120" r="80" fill="#22d3ee" opacity="0.04"/>
-  <circle cx="950" cy="420" r="120" fill="#06b6d4" opacity="0.03"/>
-  <circle cx="600" cy="300" r="60" fill="#22d3ee" opacity="0.02"/>
+    <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif">
+      <g id="masthead" transform="translate(58 32)">
+        <rect width="39" height="39" rx="11" fill="#83F2D3"/>
+        <path d="M11 25l17-11M10 18l7 11m-11-9 6 10m10-19 7 11m-3-14 7 11"
+              fill="none" stroke="#13292A" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="54" y="27" fill="#D4E6E2" font-size="21" font-weight="700">iPhone 动作库</text>
+      </g>
 
-  <title>FitGuide · 健身动作指导 — 1324 个动作中英双语离线字典，深空液态玻璃美学</title>
+      <g id="identity">
+        <text x="52" y="227" fill="#F2FFF9" font-size="138" font-weight="800"
+              letter-spacing="-8">FitGuide</text>
+        <text x="59" y="296" fill="#83F2D3" font-size="51" font-weight="700"
+              letter-spacing="2">健身动作指导</text>
+        <text x="62" y="344" fill="#C3D7D5" font-size="26">中英对照步骤 · GIF 循环示范</text>
+      </g>
 
-  <!-- Left: App identity -->
-  <g transform="translate(80, 100)">
-    <!-- Teal accent line -->
-    <rect x="0" y="0" width="4" height="120" rx="2" fill="url(#tealAccent)"/>
-
-    <!-- App icon placeholder: stylized dumbbell in glass -->
-    <g transform="translate(28, 12)">
-      <rect x="0" y="0" width="64" height="64" rx="16" fill="url(#glassCard)" stroke="#22d3ee" stroke-width="1" stroke-opacity="0.3"/>
-      <!-- Stylized dumbbell -->
-      <rect x="12" y="27" width="40" height="10" rx="3" fill="#22d3ee" opacity="0.7"/>
-      <rect x="8" y="20" width="8" height="24" rx="2" fill="#22d3ee" opacity="0.5"/>
-      <rect x="48" y="20" width="8" height="24" rx="2" fill="#22d3ee" opacity="0.5"/>
+      <g id="facts">
+        <text x="58" y="439" fill="#F2FFF9" font-size="37" font-weight="700">1,324</text>
+        <text x="170" y="437" fill="#C3D7D5" font-size="23">个离线动作</text>
+        <text x="1141" y="437" text-anchor="end" fill="#C3D7D5" font-size="23">哑铃深蹲</text>
+      </g>
     </g>
 
-    <!-- Title -->
-    <text x="108" y="38" font-family="SF Pro Display, PingFang SC, system-ui, sans-serif" font-size="48" font-weight="700" fill="#f0f4f8" letter-spacing="-0.5">FitGuide</text>
-    <text x="108" y="72" font-family="PingFang SC, SF Pro Text, system-ui, sans-serif" font-size="24" font-weight="500" fill="#94a3b8" letter-spacing="1">健身动作指导</text>
+    <g id="movement-study">
+      <path d="M782 120c-74 12-96 68-49 100 14 10 31 16 54 19"
+            fill="none" stroke="#80EBD2" stroke-width="1.7" stroke-dasharray="5 7"
+            marker-end="url(#arrow)" opacity=".8"/>
+      <path d="M750 378h354m-314-5v10m291-10v10" stroke="#80EBD2" opacity=".4" fill="none"/>
 
-    <!-- Stats row -->
-    <g transform="translate(108, 98)">
-      <rect x="0" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="39" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">1324 动作</text>
+      <!-- Standing phase, drawn as a contour so the lowered phase stays in focus. -->
+      <g id="standing" fill="#80EBD2" fill-opacity=".045" stroke="#80EBD2"
+         stroke-opacity=".36" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M810 102c-12-6-19-18-16-32 3-16 17-25 33-23 15 1 25 10 27 24
+                 l8 11-7 5-2 11c-2 6-9 9-17 7l1 13-26 5z"/>
+        <path d="M813 112c-16 9-24 31-26 53l-7 61 61 2 9-60 23 20
+                 c7 5 17 2 22-5l26-32-13-12-27 26-28-39c-10-14-24-21-40-14z"/>
+        <path d="M782 225h58l3 65-9 71 24 6c6 2 7 7 4 11h-51l-2-15 3-76-15-1-2 75
+                 21 8v9h-46l-3-15 4-78z"/>
+        <path d="M910 132h16v23h-16z"/>
+        <path d="M793 226h37m-39 59h41" fill="none"/>
+      </g>
 
-      <rect x="88" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="127" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">中英双语</text>
+      <!-- Lowered phase. Rear limbs are painted first. -->
+      <g id="lowered" stroke-linejoin="round">
+        <path d="M1029 345c7 3 13 8 25 11l21 3c6 1 9 5 7 10h-67
+                 c-5 0-7-4-5-9l6-18z" fill="#638189" stroke="#93AFAF" stroke-width="1.4"/>
+        <path d="M979 262c11-8 29-9 41 1 10 8 17 19 18 33l-8 51
+                 c-2 8-16 9-24 1l-5-51-29-15z" fill="#986957" stroke="#D59A7F" stroke-width="1.3"/>
+        <path d="M870 242c34-1 72 0 103 4 19 2 34 9 43 22l-22 36-36-7-77 3
+                 c-16-1-29-11-31-24-3-14 5-28 20-34z" fill="#23353F" stroke="#6D858B" stroke-width="1.5"/>
+        <path d="M936 146c12-5 26 2 33 15l17 32 39-49 15 8-35 65
+                 c-5 11-17 14-27 8l-14-10-33-41z" fill="#A37261" stroke="#D8A18B" stroke-width="1.4"/>
 
-      <rect x="176" y="0" width="78" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="215" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">离线可用</text>
+        <!-- Near leg and shoe. -->
+        <path d="M966 273c19-7 33 3 35 16 2 15-9 35-20 51l-15 24
+                 c-5 8-18 9-26 3-4-3-4-8-2-12l12-42 5-26z"
+              fill="url(#skin)" stroke="#E6A78B" stroke-width="1.6"/>
+        <path d="M941 355l17 2 12 6 29 3c9 1 14 6 14 12h-77
+                 c-5 0-7-4-6-9l3-10z" fill="#E5F2E9" stroke="#B5D8CD" stroke-width="1.4"/>
+        <path d="M930 372c23 2 50 1 81 0l2 6h-77c-4 0-6-2-6-6z" fill="#64958D"/>
+        <path d="M965 361l-4 7m12-5-3 6" fill="none" stroke="#56837F" stroke-width="1.8"/>
 
-      <rect x="264" y="0" width="64" height="28" rx="14" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="296" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">iOS 18+</text>
-    </g>
-  </g>
+        <path d="M866 235c17-4 39 4 55 8l56 9c17 3 29 18 26 34l-5 18
+                 c-14 5-29 2-44-4l-72 8c-28 3-48-9-49-31-2-19 12-36 33-42z"
+              fill="url(#shorts)" stroke="#80969C" stroke-width="1.7"/>
+        <path d="M852 278c14 16 46 15 67 11l48-8m-13 19c11-8 17-19 19-26m17 29 4-10"
+              fill="none" stroke="#78AAAC" stroke-opacity=".5" stroke-width="1.5"/>
 
-  <!-- Right: UI preview cards (simulated glass cards) -->
-  <g transform="translate(620, 60)">
-    <!-- Main card: Exercise detail preview -->
-    <rect x="0" y="0" width="500" height="480" rx="20" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+        <!-- Neck and profile. -->
+        <path d="M941 134l14-17 24 12-12 25-7 13-26-13z" fill="url(#skin)"
+              stroke="#DB9F87" stroke-width="1.5"/>
+        <path d="M954 106c1-17 16-32 33-31 18 0 32 13 33 28l-2 9 7 11
+                 c1 2-1 4-4 5l-5 1-2 12c-1 7-8 11-15 9l-14-5-12-11
+                 c-10-2-18-13-19-28z" fill="url(#skin)" stroke="#F3BFA8" stroke-width="1.6"/>
+        <path d="M955 117c-5-7-8-20-4-30 5-13 20-22 37-21 17 1 32 11 34 25
+                 -10 4-19 2-25-4-4 10-12 17-23 19l-4 13-7 5z"
+              fill="#18262D" stroke="#526F72" stroke-width="1.5"/>
+        <path d="M960 91c6-11 20-16 34-14m17 33-6 1m5 25-6-1"
+              stroke="#6E514C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
 
-    <!-- Top highlight -->
-    <rect x="0" y="0" width="500" height="1" rx="0.5" fill="url(#glassHighlight)"/>
+        <path d="M941 132c-22-5-40 9-54 31-12 18-19 44-44 70l-9 21
+                 c16 12 43 16 64 9 18-5 26-18 39-36l32-40c9-14 6-29-7-43z"
+              fill="url(#shirt)" stroke="#A7F8DE" stroke-width="1.7"/>
+        <path d="M944 138c-10 5-18 10-25 20m-38 62c15-10 34-34 43-53m-84 78
+                 c19 9 37 10 55 4m-7 2 10-11" fill="none" stroke="#226C63"
+              stroke-width="1.8" stroke-opacity=".7"/>
 
-    <!-- Card inner: exercise card mock -->
-    <!-- Thumbnail area -->
-    <rect x="24" y="24" width="88" height="88" rx="12" fill="#0f1a2e" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.2"/>
-    <!-- Dumbbell icon in thumbnail -->
-    <g transform="translate(44, 54)">
-      <line x1="0" y1="14" x2="48" y2="14" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-      <line x1="8" y1="4" x2="8" y2="24" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-      <line x1="40" y1="4" x2="40" y2="24" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-    </g>
-
-    <!-- Exercise name bilingual -->
-    <text x="130" y="48" font-family="PingFang SC, system-ui, sans-serif" font-size="20" font-weight="600" fill="#e2e8f0">杠铃卧推</text>
-    <text x="130" y="72" font-family="SF Pro Text, system-ui, sans-serif" font-size="13" font-weight="400" fill="#64748b" font-variant="small-caps">Barbell Bench Press</text>
-
-    <!-- Target muscle chip -->
-    <rect x="130" y="82" width="48" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-    <text x="154" y="97" font-family="PingFang SC, system-ui, sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle">胸大肌</text>
-
-    <!-- Divider -->
-    <line x1="24" y1="140" x2="476" y2="140" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.06"/>
-
-    <!-- Bilingual steps preview -->
-    <g transform="translate(24, 156)">
-      <!-- Step 1 -->
-      <rect x="0" y="0" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="11" y="15" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">1</text>
-      <text x="34" y="15" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">平躺在卧推凳上，双脚平踩地面</text>
-      <text x="34" y="34" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Lie flat on bench, feet flat on floor</text>
-
-      <!-- Step 2 -->
-      <rect x="0" y="52" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="11" y="67" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">2</text>
-      <text x="34" y="67" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">正握杠铃，双手略宽于肩</text>
-      <text x="34" y="86" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Grip bar with hands slightly wider than shoulders</text>
-
-      <!-- Step 3 -->
-      <rect x="0" y="104" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="11" y="119" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">3</text>
-      <text x="34" y="119" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">缓慢下放杠铃至胸部上方</text>
-      <text x="34" y="138" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Lower bar slowly to chest level</text>
-
-      <!-- Step 4 -->
-      <rect x="0" y="156" width="22" height="22" rx="11" fill="url(#chipBg)" stroke="#22d3ee" stroke-width="0.5" stroke-opacity="0.3"/>
-      <text x="11" y="171" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" font-weight="600" fill="#22d3ee" text-anchor="middle">4</text>
-      <text x="34" y="171" font-family="PingFang SC, system-ui, sans-serif" font-size="14" fill="#cbd5e1">推起杠铃至手臂伸直，顶峰收缩</text>
-      <text x="34" y="190" font-family="SF Pro Text, system-ui, sans-serif" font-size="11" fill="#475569">Press bar up, squeeze at top</text>
-    </g>
-
-    <!-- Bottom metadata bar -->
-    <g transform="translate(24, 380)">
-      <!-- Equipment -->
-      <rect x="0" y="0" width="96" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
-      <text x="48" y="19" font-family="SF Pro Text, PingFang SC, system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">🏋️ 杠铃 Barbell</text>
-
-      <!-- Body part -->
-      <rect x="108" y="0" width="100" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
-      <text x="158" y="19" font-family="SF Pro Text, PingFang SC, system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">🦾 胸 Chest</text>
-
-      <!-- Attribution -->
-      <rect x="220" y="0" width="256" height="28" rx="8" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
-      <text x="348" y="19" font-family="SF Pro Text, system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">© Gym visual — gymvisual.com</text>
-    </g>
-
-    <!-- Tab bar at bottom of card -->
-    <g transform="translate(24, 432)">
-      <rect x="0" y="0" width="452" height="36" rx="18" fill="url(#glassCard)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.06"/>
-      <text x="70" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" font-weight="600" fill="#22d3ee" text-anchor="middle">动作</text>
-      <text x="190" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">训练</text>
-      <text x="310" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">收藏</text>
-      <text x="410" y="23" font-family="PingFang SC, system-ui, sans-serif" font-size="13" fill="#64748b" text-anchor="middle">我的</text>
+        <!-- Vertical dumbbell, then the near hand around its handle. -->
+        <g transform="rotate(13 1039 149)">
+          <path d="M1035 129h9v39h-9z" fill="#8EC9BE" stroke="#183539" stroke-width="2"/>
+          <path d="M1024 117h28l5 6v10l-5 5h-28l-5-5v-10zm0 44h28l5 5v10l-5 6h-28l-5-6v-10z"
+                fill="#17272F" stroke="#9ACABC" stroke-width="1.6"/>
+          <path d="M1026 123h21m-21 44h21" stroke="#65958D" stroke-width="1.7"/>
+        </g>
+        <path d="M953 160c12-5 23 2 28 14l11 27 31-41 2-10c1-5 6-9 12-8
+                 l11 4c3 1 4 4 2 7l-6 10-8 5-30 58c-5 9-15 11-24 8-7-2-14-9-18-16
+                 l-23-31c-8-12-2-22 12-27z" fill="url(#skin)" stroke="#F0B396" stroke-width="1.6"/>
+        <path d="M952 156c12-5 24 0 31 11l8 15c-9 10-22 15-42 16l-12-16
+                 c-7-11 3-21 15-26z" fill="url(#shirt)" stroke="#A7F8DE" stroke-width="1.5"/>
+        <path d="M945 190c16-2 30-7 41-15" fill="none" stroke="#317C70" stroke-width="1.6"/>
+      </g>
     </g>
   </g>
+  <rect x=".5" y=".5" width="1199" height="467" rx="27.5" fill="none"
+        stroke="#90BEBA" stroke-opacity=".25"/>
 </svg>
