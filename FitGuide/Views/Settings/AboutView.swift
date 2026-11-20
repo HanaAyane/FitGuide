@@ -13,9 +13,6 @@ struct AboutView: View {
                         Text("HanaAyane")
                             .font(.title2.weight(.semibold))
                             .foregroundColor(.textPrimary)
-                        Text("HanaAyane")
-                            .font(.subheadline.smallCaps())
-                            .foregroundColor(.textSecondary)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, Spacing.m.rawValue)
@@ -61,9 +58,11 @@ struct AboutView: View {
                             Text("FitGuide · 健身动作指导")
                                 .font(.headline)
                                 .foregroundColor(.textPrimary)
-                            Text("Version 2.0")
-                                .font(.subheadline.monospacedDigit())
-                                .foregroundColor(Color.accentColor)
+                            if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+                                Text("Version \(version)")
+                                    .font(.subheadline.monospacedDigit())
+                                    .foregroundColor(Color.accentColor)
+                            }
                             Text("1324 个动作 · 离线训练记录 · 中英双语")
                                 .font(.caption)
                                 .foregroundColor(.textSecondary)

@@ -44,8 +44,8 @@ targets:
       properties:
         CFBundleDisplayName: FitGuide
         CFBundleName: FitGuide
-        CFBundleShortVersionString: "2.0"
-        CFBundleVersion: "2"
+        CFBundleShortVersionString: "2.0.1"
+        CFBundleVersion: "3"
         UIRequiresFullScreen: true
         NSSupportsLiveActivities: true
         UISupportedInterfaceOrientations:

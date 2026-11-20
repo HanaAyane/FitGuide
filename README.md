@@ -13,7 +13,7 @@
   <a href="https://developer.apple.com/ios/ios-18/"><img src="https://img.shields.io/badge/iOS-18%2B-48D7F2?style=flat-square&labelColor=071420" alt="iOS 18+" /></a>
   <a href="https://www.swift.org/"><img src="https://img.shields.io/badge/Swift-5.9-6EA7FF?style=flat-square&labelColor=071420" alt="Swift 5.9" /></a>
   <a href="https://developer.apple.com/xcode/swiftui/"><img src="https://img.shields.io/badge/SwiftUI%20%2B%20SwiftData-8E83FF?style=flat-square&labelColor=071420" alt="SwiftUI and SwiftData" /></a>
-  <img src="https://img.shields.io/badge/version-2.0-F6F8FB?style=flat-square&labelColor=071420" alt="Version 2.0" />
+  <img src="https://img.shields.io/badge/version-2.0.1-F6F8FB?style=flat-square&labelColor=071420" alt="Version 2.0.1" />
 </p>
 
 <p align="center">
@@ -96,7 +96,7 @@ xcodebuild -project FitGuide.xcodeproj -scheme FitGuide \
 
 ## 项目文档
 
-- [v2.0 GitHub Release](https://github.com/HanaAyane/FitGuide/releases/tag/v2.0) · [2.0 版本说明](RELEASE_NOTES_V2.0.md)
+- [v2.0.1 GitHub Release](https://github.com/HanaAyane/FitGuide/releases/tag/v2.0.1) · [2.0 版本说明](RELEASE_NOTES_V2.0.md)
 - [v1.0 标签](https://github.com/HanaAyane/FitGuide/tree/refs/tags/v1.0)
 - [2.0 设计说明](.design/fitness-app/V2_DESIGN_BRIEF.md) · [开发清单](.design/fitness-app/V2_TASKS.md) · [维护指南](AGENTS.md)
 

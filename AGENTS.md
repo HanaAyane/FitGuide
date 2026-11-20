@@ -90,4 +90,4 @@ FitGuide/
 - GitHub: https://github.com/HanaAyane
 
 ## 当前版本
-- v2.0（分支 `v2.0`，marketing version 2.0 / build 2）
+- v2.0.1（`main`，marketing version 2.0.1 / build 3）
