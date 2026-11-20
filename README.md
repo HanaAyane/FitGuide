@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="#app-截图">App 截图</a> ·
   <a href="#快速开始">快速开始</a> ·
   <a href="#1-准备动作数据集">动作数据集</a> ·
   <a href="#从查动作到记训练">训练流程</a> ·
@@ -26,6 +27,16 @@
 <img src="assets/readme/hero.svg" width="100%" alt="FitGuide 健身动作指导。1324 个离线动作，提供中英对照步骤与 GIF 循环示范。配图为哑铃深蹲动作分解。">
 
 FitGuide 是一个面向 iPhone 的离线健身动作库和训练记录 App。查阅 1324 个动作的 GIF 示范和中英对照步骤，按计划或自由开始训练，记录每组重量和次数，练完回看摘要和历史。
+
+## App 截图
+
+在 iPhone 17 模拟器中运行 FitGuide 2.0.1，使用演示数据截取动作筛选、训练首页和训练摘要。点击图片可查看大图。
+
+<p align="center">
+  <a href="assets/readme/screenshots/exercise-filters.webp"><img src="assets/readme/screenshots/exercise-filters.webp" width="240" alt="动作筛选页，按身体部位、器械和目标肌群筛选"></a>
+  <a href="assets/readme/screenshots/training-home.webp"><img src="assets/readme/screenshots/training-home.webp" width="240" alt="训练首页，显示快速开始、训练计划和最近一次训练"></a>
+  <a href="assets/readme/screenshots/workout-summary.webp"><img src="assets/readme/screenshots/workout-summary.webp" width="240" alt="训练完成摘要，显示时长、动作数、完成组、总次数和每组详情"></a>
+</p>
 
 ## 从查动作到记训练
 
