@@ -93,9 +93,9 @@ final class FitGuideUITests: XCTestCase {
         addFixtureExercise()
         app.terminate()
 
-        launch(extraArguments: ["--ui-testing-persistent-store"])
-        XCTAssertTrue(
-            app.buttons["training.continueWorkout"].waitForExistence(timeout: 8)
+        launch(
+            extraArguments: ["--ui-testing-persistent-store"],
+            expectedTrainingButton: "training.continueWorkout"
         )
         app.buttons["training.continueWorkout"].tap()
         XCTAssertTrue(app.buttons["workout.completeSet"].waitForExistence(timeout: 8))
@@ -202,14 +202,17 @@ final class FitGuideUITests: XCTestCase {
         )
     }
 
-    private func launch(extraArguments: [String] = []) {
+    private func launch(
+        extraArguments: [String] = [],
+        expectedTrainingButton: String = "training.quickStart"
+    ) {
         app = XCUIApplication()
         app.launchArguments = [
             "--ui-testing",
             "--ui-testing-training-tab"
         ] + extraArguments
         app.launch()
-        XCTAssertTrue(app.buttons["training.quickStart"].waitForExistence(timeout: 12))
+        XCTAssertTrue(app.buttons[expectedTrainingButton].waitForExistence(timeout: 12))
     }
 
     private func startQuickWorkout() {
