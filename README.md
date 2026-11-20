@@ -176,7 +176,7 @@ v2 在同一个 SwiftData store 中增加训练历史模型。新增计划字段
 
 ## 作者
 
-**HanaAyane** · [GitHub](https://github.com/HanaAyane)
+仓库作者 · [HanaAyane](https://github.com/HanaAyane)
 
 如果你在研究 SwiftUI、SwiftData、离线内容打包或一套完整训练状态机，欢迎从 [V2_DESIGN_BRIEF.md](.design/fitness-app/V2_DESIGN_BRIEF.md) 开始阅读设计取舍。
 
