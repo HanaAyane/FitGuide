@@ -1,319 +1,532 @@
 import SwiftUI
 
 struct PlansView: View {
-    @EnvironmentObject var library: LibraryStore
-    @EnvironmentObject var store: ExerciseStore
-    @State private var showCreate = false
-    @State private var newName = ""
+    @EnvironmentObject private var library: LibraryStore
+    @EnvironmentObject private var exerciseStore: ExerciseStore
+    @EnvironmentObject private var workoutStore: ActiveWorkoutStore
+
+    @State private var showCreatePlan = false
+    @State private var newPlanName = ""
+    @State private var presentedSession: WorkoutSession?
+
+    private var recentSessions: [WorkoutSession] {
+        workoutStore.completedSessions(limit: 3)
+    }
 
     var body: some View {
         NavigationStack {
             ZStack {
                 SpaceBackground()
-                if library.trainingPlans.isEmpty {
-                    VStack(spacing: Spacing.s.rawValue) {
-                        Spacer()
-                        Image(systemName: "list.clipboard")
-                            .font(.system(size: 56, weight: .light))
-                            .foregroundColor(.textSecondary)
-                        Text("还没有训练计划")
-                            .font(.headline)
-                            .foregroundColor(.textPrimary)
-                        Text("No plans yet")
-                            .font(.subheadline.smallCaps())
-                            .foregroundColor(.textSecondary)
-                        Button {
-                            showCreate.toggle()
-                        } label: {
-                            Label("新建计划 New Plan", systemImage: "plus")
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundColor(Color.accentColor)
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: Spacing.m.rawValue) {
+                        if workoutStore.activeSession != nil {
+                            activeWorkoutCard
+                        } else {
+                            quickStartCard
                         }
-                        Spacer()
-                    }
-                } else {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: Spacing.m.rawValue) {
-                            ForEach(library.trainingPlans) { plan in
-                                NavigationLink {
-                                    PlanEditorView(plan: plan)
-                                } label: {
-                                    PlanCard(plan: plan)
-                                        .contentShape(Rectangle())
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            Button {
-                                showCreate.toggle()
-                            } label: {
-                                Label("新建计划 New Plan", systemImage: "plus.circle")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color.accentColor)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(Spacing.m.rawValue)
-                                    .background(
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: Radii.card.rawValue)
-                                                .fill(.ultraThinMaterial)
-                                            RoundedRectangle(cornerRadius: Radii.card.rawValue)
-                                                .strokeBorder(Color.white.opacity(0.1), lineWidth: 1)
-                                        }
-                                    )
-                            }
-                            .buttonStyle(.plain)
+                        plansSection
+
+                        if !recentSessions.isEmpty {
+                            recentSection
                         }
-                        .padding(.horizontal, Spacing.m.rawValue)
-                        .padding(.top, Spacing.m.rawValue)
                     }
+                    .padding(Spacing.m.rawValue)
                 }
             }
-            .navigationTitle("训练计划")
+            .navigationTitle("训练 Training")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Exercise.self) { ex in
-                ExerciseDetailView(exercise: ex)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showCreatePlan = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .accessibilityLabel("新建训练计划 New training plan")
+                }
             }
-            .alert("新建计划 New Plan", isPresented: $showCreate) {
-                TextField("计划名称 Plan name", text: $newName)
-                Button("取消", role: .cancel) { newName = "" }
-                Button("创建", action: {
-                    let name = newName.trimmingCharacters(in: .whitespaces)
+            .navigationDestination(for: Exercise.self) { exercise in
+                ExerciseDetailView(exercise: exercise)
+            }
+            .fullScreenCover(item: $presentedSession) { session in
+                WorkoutSessionView(session: session)
+            }
+            .alert("新建计划 New Plan", isPresented: $showCreatePlan) {
+                TextField("计划名称 Plan name", text: $newPlanName)
+                Button("取消 Cancel", role: .cancel) {
+                    newPlanName = ""
+                }
+                Button("创建 Create") {
+                    let name = newPlanName.trimmingCharacters(in: .whitespacesAndNewlines)
                     if !name.isEmpty {
                         _ = library.addPlan(named: name)
-                        newName = ""
+                        newPlanName = ""
                     }
-                })
+                }
+            }
+            .alert(
+                "无法完成操作 · Operation failed",
+                isPresented: Binding(
+                    get: { library.lastErrorMessage != nil || workoutStore.lastErrorMessage != nil },
+                    set: { presented in
+                        if !presented {
+                            library.clearError()
+                            workoutStore.clearError()
+                        }
+                    }
+                )
+            ) {
+                Button("好 OK", role: .cancel) {
+                    library.clearError()
+                    workoutStore.clearError()
+                }
+            } message: {
+                Text(
+                    workoutStore.lastErrorMessage
+                        ?? library.lastErrorMessage
+                        ?? "未知错误 Unknown error"
+                )
             }
         }
     }
-}
 
-private struct PlanCard: View {
-    let plan: TrainingPlan
+    private var activeWorkoutCard: some View {
+        Button {
+            presentedSession = workoutStore.activeSession
+        } label: {
+            GlassCard {
+                HStack(spacing: Spacing.m.rawValue) {
+                    Image(systemName: "figure.run.circle.fill")
+                        .font(.system(size: 36))
+                        .foregroundColor(Color.accentColor)
+                    VStack(alignment: .leading, spacing: Spacing.xs.rawValue) {
+                        Text("继续训练")
+                            .font(.headline)
+                            .foregroundColor(.textPrimary)
+                        Text(workoutStore.activeSession?.displayName ?? "CONTINUE WORKOUT")
+                            .font(.caption.smallCaps())
+                            .foregroundColor(.textSecondary)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color.accentColor)
+                }
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint("打开正在进行的训练 Open active workout")
+        .accessibilityIdentifier("training.continueWorkout")
+    }
 
-    var body: some View {
-        GlassCard {
-            HStack {
-                VStack(alignment: .leading, spacing: Spacing.xs.rawValue) {
-                    Text(plan.name)
+    private var quickStartCard: some View {
+        Button {
+            if let session = workoutStore.startQuickWorkout() {
+                presentedSession = session
+            }
+        } label: {
+            GlassCard {
+                HStack(spacing: Spacing.m.rawValue) {
+                    Image(systemName: "bolt.fill")
+                        .font(.title2)
+                        .foregroundColor(Color.accentColor)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("快速开始")
+                            .font(.headline)
+                            .foregroundColor(.textPrimary)
+                        Text("QUICK START")
+                            .font(.caption2.smallCaps())
+                            .foregroundColor(.textSecondary)
+                    }
+                    Spacer()
+                    Image(systemName: "play.fill")
+                        .foregroundColor(Color.accentColor)
+                }
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("快速开始 Quick Start")
+        .accessibilityIdentifier("training.quickStart")
+    }
+
+    @ViewBuilder
+    private var plansSection: some View {
+        sectionHeader(zh: "训练计划", en: "Plans")
+
+        if library.trainingPlans.isEmpty {
+            GlassCard {
+                VStack(alignment: .leading, spacing: Spacing.s.rawValue) {
+                    Text("还没有训练计划")
                         .font(.headline)
                         .foregroundColor(.textPrimary)
-                    Text("\(plan.items.count) 个动作 · Items")
-                        .font(.caption.smallCaps())
+                    Text("Create a reusable plan or start a free workout.")
+                        .font(.caption)
                         .foregroundColor(.textSecondary)
+                    Button("新建计划 New Plan") {
+                        showCreatePlan = true
+                    }
+                    .foregroundColor(Color.accentColor)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        } else {
+            ForEach(library.trainingPlans) { plan in
+                PlanCard(
+                    plan: plan,
+                    canStart: exerciseStore.isReady,
+                    start: {
+                        start(plan)
+                    }
+                )
+            }
+        }
+    }
+
+    private var recentSection: some View {
+        Group {
+            HStack {
+                sectionHeader(zh: "最近训练", en: "Recent")
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.subheadline)
-                    .foregroundColor(.textSecondary)
-            }
-        }
-        .contentShape(Rectangle())
-    }
-}
-
-struct PlanEditorView: View {
-    @Bindable var plan: TrainingPlan
-    @EnvironmentObject var library: LibraryStore
-    @EnvironmentObject var store: ExerciseStore
-    @State private var renaming = false
-    @State private var renameText = ""
-
-    private var pendingItems: [TrainingPlanItem] {
-        plan.items.filter { !$0.isCompleted }.sorted { $0.order < $1.order }
-    }
-
-    private var completedItems: [TrainingPlanItem] {
-        plan.items.filter { $0.isCompleted }.sorted { ($0.completedAt ?? .distantPast) > ($1.completedAt ?? .distantPast) }
-    }
-
-    var body: some View {
-        ZStack {
-            SpaceBackground()
-            ScrollView {
-                VStack(alignment: .leading, spacing: Spacing.m.rawValue) {
-                    HStack {
-                        Text(plan.name)
-                            .font(.title3.weight(.semibold))
-                            .foregroundColor(.textPrimary)
-                        Spacer()
-                        if !completedItems.isEmpty {
-                            Button {
-                                library.uncompleteAllItems(in: plan)
-                            } label: {
-                                Label("重置 Reset", systemImage: "arrow.counterclockwise")
-                                    .font(.caption)
-                                    .foregroundColor(.textSecondary)
-                            }
-                        }
-                        Button {
-                            renameText = plan.name
-                            renaming.toggle()
-                        } label: {
-                            Image(systemName: "pencil")
-                                .foregroundColor(.textSecondary)
-                        }
-                    }
-                    .padding(.horizontal, Spacing.s.rawValue)
-
-                    let total = plan.items.count
-                    let done = completedItems.count
-                    if total > 0 {
-                        GlassCard(padding: Spacing.s.rawValue) {
-                            VStack(alignment: .leading, spacing: Spacing.xs.rawValue) {
-                                HStack {
-                                    Text("进度 Progress")
-                                        .font(.caption.smallCaps())
-                                        .foregroundColor(.textSecondary)
-                                    Spacer()
-                                    Text("\(done)/\(total)")
-                                        .font(.caption.monospacedDigit())
-                                        .foregroundColor(Color.accentColor)
-                                }
-                                ProgressView(value: Double(done), total: Double(total))
-                                    .tint(Color.accentColor)
-                            }
-                        }
-                        .padding(.horizontal, Spacing.s.rawValue)
-                    }
-
-                    if plan.items.isEmpty {
-                        GlassCard(padding: Spacing.l.rawValue) {
-                            Text("从动作详情页右上角菜单”加入计划”添加\nAdd from exercise details")
-                                .font(.subheadline)
-                                .foregroundColor(.textSecondary)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    } else {
-                        if !pendingItems.isEmpty {
-                            sectionHeader(zh: "待完成", en: "Pending", count: pendingItems.count)
-                            ForEach(pendingItems) { item in
-                                planItemRow(item)
-                            }
-                        }
-                        if !completedItems.isEmpty {
-                            sectionHeader(zh: "已完成", en: "Completed", count: completedItems.count)
-                            ForEach(completedItems) { item in
-                                planItemRow(item)
-                            }
-                        }
-                    }
+                NavigationLink {
+                    WorkoutHistoryView()
+                } label: {
+                    Text("全部 All")
+                        .font(.caption)
+                        .foregroundColor(Color.accentColor)
                 }
-                .padding(Spacing.m.rawValue)
+                .accessibilityIdentifier("training.history.all")
             }
-        }
-        .navigationTitle("计划编辑")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: Exercise.self) { ex in
-            ExerciseDetailView(exercise: ex)
-        }
-        .alert("重命名计划 Rename Plan", isPresented: $renaming) {
-            TextField("名称", text: $renameText)
-            Button("取消", role: .cancel) { }
-            Button("保存", action: {
-                let n = renameText.trimmingCharacters(in: .whitespaces)
-                if !n.isEmpty { library.renamePlan(plan, to: n) }
-            })
+
+            ForEach(recentSessions) { session in
+                NavigationLink {
+                    WorkoutSummaryView(session: session, isHistory: true)
+                } label: {
+                    WorkoutHistoryRow(session: session)
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("training.recent.row")
+            }
         }
     }
 
-    private func sectionHeader(zh: String, en: String, count: Int) -> some View {
-        HStack {
+    private func sectionHeader(zh: String, en: String) -> some View {
+        HStack(spacing: Spacing.s.rawValue) {
             Text(zh)
                 .font(.headline)
                 .foregroundColor(.textPrimary)
             Text(en.uppercased())
                 .font(.caption2.smallCaps())
                 .foregroundColor(.textSecondary)
-            Spacer()
-            Text("\(count)")
-                .font(.subheadline.monospacedDigit())
-                .foregroundColor(.textSecondary)
         }
-        .padding(.horizontal, Spacing.s.rawValue)
         .padding(.top, Spacing.s.rawValue)
     }
 
-    @ViewBuilder
-    private func planItemRow(_ item: TrainingPlanItem) -> some View {
-        if let ex = store.exercises.first(where: { $0.id == item.exerciseId }) {
-            GlassCard(padding: Spacing.s.rawValue) {
-                VStack(alignment: .leading, spacing: Spacing.s.rawValue) {
-                    HStack {
-                        NavigationLink {
-                            ExerciseDetailView(exercise: ex)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(ex.nameZH)
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundColor(item.isCompleted ? .textSecondary : .textPrimary)
-                                    .strikethrough(item.isCompleted, color: .textSecondary)
-                                Text(ex.name.capitalized)
-                                    .font(.caption2.smallCaps())
-                                    .foregroundColor(.textSecondary)
+    private func start(_ plan: TrainingPlan) {
+        // A plan start is never allowed to create a second active session. This
+        // also lets a tap on a plan's play button recover cleanly after the app
+        // has restored an in-progress workout from disk.
+        if let active = workoutStore.activeSession {
+            presentedSession = active
+            return
+        }
+        guard exerciseStore.isReady else { return }
+
+        let byId = Dictionary(
+            uniqueKeysWithValues: exerciseStore.exercises.map { ($0.id, $0) }
+        )
+        if let session = workoutStore.start(plan: plan, exercisesById: byId) {
+            presentedSession = session
+        }
+    }
+}
+
+private struct PlanCard: View {
+    let plan: TrainingPlan
+    let canStart: Bool
+    let start: () -> Void
+
+    var body: some View {
+        GlassCard {
+            HStack(spacing: Spacing.m.rawValue) {
+                NavigationLink {
+                    PlanEditorView(plan: plan)
+                } label: {
+                    VStack(alignment: .leading, spacing: Spacing.xs.rawValue) {
+                        Text(plan.name)
+                            .font(.headline)
+                            .foregroundColor(.textPrimary)
+                        Text("\(plan.items.count) 个动作 · \(plan.items.count) ITEMS")
+                            .font(.caption.smallCaps())
+                            .foregroundColor(.textSecondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.plain)
+
+                Button(action: start) {
+                    Image(systemName: canStart ? "play.fill" : "hourglass")
+                        .font(.headline)
+                        .foregroundColor(Color.accentColor)
+                        .frame(width: 44, height: 44)
+                        .background(Color.accentColor.opacity(0.12), in: Circle())
+                }
+                .disabled(plan.items.isEmpty || !canStart)
+                .opacity(plan.items.isEmpty || !canStart ? 0.35 : 1)
+                .accessibilityLabel(
+                    canStart
+                        ? "开始 \(plan.name) Start plan"
+                        : "动作库加载中 Loading exercise catalog"
+                )
+                .accessibilityIdentifier("training.planStart")
+            }
+        }
+    }
+}
+
+struct PlanEditorView: View {
+    @Bindable var plan: TrainingPlan
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var library: LibraryStore
+    @EnvironmentObject private var exerciseStore: ExerciseStore
+    @EnvironmentObject private var workoutStore: ActiveWorkoutStore
+
+    @State private var renaming = false
+    @State private var renameText = ""
+    @State private var presentedSession: WorkoutSession?
+    @State private var confirmDeletePlan = false
+
+    private var sortedItems: [TrainingPlanItem] {
+        plan.items.sorted { $0.order < $1.order }
+    }
+
+    var body: some View {
+        ZStack {
+            SpaceBackground()
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: Spacing.m.rawValue) {
+                    GlassCard {
+                        VStack(alignment: .leading, spacing: Spacing.m.rawValue) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(plan.name)
+                                        .font(.title3.weight(.semibold))
+                                        .foregroundColor(.textPrimary)
+                                    Text("\(plan.items.count) ITEMS · REUSABLE TEMPLATE")
+                                        .font(.caption2.smallCaps())
+                                        .foregroundColor(.textSecondary)
+                                }
+                                Spacer()
+                                Button {
+                                    renameText = plan.name
+                                    renaming = true
+                                } label: {
+                                    Image(systemName: "pencil")
+                                        .frame(width: 44, height: 44)
+                                }
+                                .accessibilityLabel("重命名计划 Rename plan")
                             }
-                        }
-                        .buttonStyle(.plain)
-                        Spacer()
-                        Button(role: .destructive) {
-                            library.deleteItem(item)
-                        } label: {
-                            Image(systemName: "trash")
-                                .font(.subheadline)
-                                .foregroundColor(.red.opacity(0.7))
+
+                            Button {
+                                start(plan)
+                            } label: {
+                                Label(
+                                    exerciseStore.isReady
+                                        ? "开始训练 Start Workout"
+                                        : "加载动作库中 Loading Catalog",
+                                    systemImage: exerciseStore.isReady ? "play.fill" : "hourglass"
+                                )
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, Spacing.s.rawValue)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(Color.accentColor)
+                            .disabled(plan.items.isEmpty || !exerciseStore.isReady)
                         }
                     }
 
-                    if item.isCompleted {
-                        Text("\(item.sets)/\(item.sets) · \(item.reps) 次/组")
-                            .font(.caption.monospacedDigit())
-                            .foregroundColor(Color.accentColor)
-                    } else {
-                        HStack(spacing: Spacing.xs.rawValue) {
-                            ForEach(0..<item.sets, id: \.self) { i in
-                                let done = i < item.setStates.count && item.setStates[i]
-                                Button {
-                                    library.toggleSet(item, at: i)
-                                } label: {
-                                    Image(systemName: done ? "circle.fill" : "circle")
-                                        .font(.system(size: 20, weight: .regular))
-                                        .foregroundColor(done ? Color.accentColor : .textSecondary)
-                                }
-                                .buttonStyle(.plain)
-                            }
+                    if sortedItems.isEmpty {
+                        GlassCard {
+                            Text("从动作详情页加入动作\nAdd exercises from exercise details")
+                                .font(.subheadline)
+                                .foregroundColor(.textSecondary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        VStack(spacing: Spacing.xs.rawValue) {
-                            HStack {
-                                Text("进度 \(item.completedCount)/\(item.sets) · 次数 \(item.reps)")
-                                    .font(.caption.monospacedDigit())
-                                    .foregroundColor(.textSecondary)
-                                Spacer()
-                            }
-                            HStack(spacing: Spacing.l.rawValue) {
-                                Stepper(value: Binding(get: { item.sets }, set: { library.updateItem(item, sets: $0, reps: item.reps) }), in: 1...10) {
-                                    HStack(spacing: Spacing.xs.rawValue) {
-                                        Text("组数")
-                                            .font(.caption.weight(.medium))
-                                            .foregroundColor(.textSecondary)
-                                        Text("\(item.sets)")
-                                            .font(.subheadline.monospacedDigit().weight(.semibold))
-                                            .foregroundColor(Color.accentColor)
-                                    }
-                                }
-                                Stepper(value: Binding(get: { item.reps }, set: { library.updateItem(item, sets: item.sets, reps: $0) }), in: 1...50) {
-                                    HStack(spacing: Spacing.xs.rawValue) {
-                                        Text("次数")
-                                            .font(.caption.weight(.medium))
-                                            .foregroundColor(.textSecondary)
-                                        Text("\(item.reps)")
-                                            .font(.subheadline.monospacedDigit().weight(.semibold))
-                                            .foregroundColor(Color.accentColor)
-                                    }
-                                }
-                            }
+                    } else {
+                        ForEach(Array(sortedItems.enumerated()), id: \.element.id) { index, item in
+                            PlanTemplateItemCard(
+                                item: item,
+                                exercise: exerciseStore.exercises.first { $0.id == item.exerciseId },
+                                canMoveUp: index > 0,
+                                canMoveDown: index < sortedItems.count - 1
+                            )
                         }
                     }
+
+                    Button(role: .destructive) {
+                        confirmDeletePlan = true
+                    } label: {
+                        Label("删除计划 Delete Plan", systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding(.top, Spacing.m.rawValue)
+                }
+                .padding(Spacing.m.rawValue)
+            }
+        }
+        .navigationTitle("计划模板 Plan")
+        .navigationBarTitleDisplayMode(.inline)
+        .fullScreenCover(item: $presentedSession) { session in
+            WorkoutSessionView(session: session)
+        }
+        .alert("重命名计划 Rename Plan", isPresented: $renaming) {
+            TextField("名称 Name", text: $renameText)
+            Button("取消 Cancel", role: .cancel) {}
+            Button("保存 Save") {
+                let name = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !name.isEmpty {
+                    library.renamePlan(plan, to: name)
                 }
             }
+        }
+        .confirmationDialog(
+            "确认删除这个计划？Delete this plan?",
+            isPresented: $confirmDeletePlan,
+            titleVisibility: .visible
+        ) {
+            Button("删除 Delete", role: .destructive) {
+                library.deletePlan(plan)
+                dismiss()
+            }
+            Button("取消 Cancel", role: .cancel) {}
+        }
+        .alert(
+            "无法完成操作 · Operation failed",
+            isPresented: Binding(
+                get: {
+                    workoutStore.lastErrorMessage != nil
+                        || library.lastErrorMessage != nil
+                },
+                set: {
+                    if !$0 {
+                        workoutStore.clearError()
+                        library.clearError()
+                    }
+                }
+            )
+        ) {
+            Button("好 OK", role: .cancel) {
+                workoutStore.clearError()
+                library.clearError()
+            }
+        } message: {
+            Text(
+                workoutStore.lastErrorMessage
+                    ?? library.lastErrorMessage
+                    ?? "未知错误 Unknown error"
+            )
+        }
+    }
+
+    private func start(_ plan: TrainingPlan) {
+        if let active = workoutStore.activeSession {
+            presentedSession = active
+            return
+        }
+        guard exerciseStore.isReady else { return }
+
+        let byId = Dictionary(
+            uniqueKeysWithValues: exerciseStore.exercises.map { ($0.id, $0) }
+        )
+        if let session = workoutStore.start(plan: plan, exercisesById: byId) {
+            presentedSession = session
+        }
+    }
+}
+
+private struct PlanTemplateItemCard: View {
+    @Bindable var item: TrainingPlanItem
+    let exercise: Exercise?
+    let canMoveUp: Bool
+    let canMoveDown: Bool
+
+    @EnvironmentObject private var library: LibraryStore
+    @State private var confirmDelete = false
+
+    var body: some View {
+        GlassCard(padding: Spacing.s.rawValue) {
+            VStack(alignment: .leading, spacing: Spacing.s.rawValue) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(exercise?.nameZH ?? "动作不可用")
+                            .font(.headline)
+                            .foregroundColor(.textPrimary)
+                        Text((exercise?.name ?? "EXERCISE UNAVAILABLE").uppercased())
+                            .font(.caption2.smallCaps())
+                            .foregroundColor(.textSecondary)
+                    }
+                    Spacer()
+                    Button {
+                        library.moveItem(item, by: -1)
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .frame(width: 36, height: 36)
+                    }
+                    .disabled(!canMoveUp)
+                    Button {
+                        library.moveItem(item, by: 1)
+                    } label: {
+                        Image(systemName: "arrow.down")
+                            .frame(width: 36, height: 36)
+                    }
+                    .disabled(!canMoveDown)
+                    Button(role: .destructive) {
+                        confirmDelete = true
+                    } label: {
+                        Image(systemName: "trash")
+                            .frame(width: 36, height: 36)
+                    }
+                    .accessibilityLabel("删除动作 Delete exercise")
+                }
+
+                Stepper(
+                    "组数 Sets：\(item.sets)",
+                    value: Binding(
+                        get: { item.sets },
+                        set: { library.updateItem(item, sets: $0, reps: item.reps) }
+                    ),
+                    in: 1...10
+                )
+                Stepper(
+                    "次数 Reps：\(item.reps)",
+                    value: Binding(
+                        get: { item.reps },
+                        set: { library.updateItem(item, sets: item.sets, reps: $0) }
+                    ),
+                    in: 1...50
+                )
+                Stepper(
+                    "休息 Rest：\(item.restSeconds) 秒",
+                    value: Binding(
+                        get: { item.restSeconds },
+                        set: { library.updateItem(item, sets: item.sets, reps: item.reps, restSeconds: $0) }
+                    ),
+                    in: 0...300,
+                    step: 15
+                )
+            }
+            .foregroundColor(.textPrimary)
+        }
+        .confirmationDialog(
+            "从计划中删除这个动作？Remove this exercise from the plan?",
+            isPresented: $confirmDelete,
+            titleVisibility: .visible
+        ) {
+            Button("删除 Delete", role: .destructive) {
+                library.deleteItem(item)
+            }
+            Button("取消 Cancel", role: .cancel) {}
         }
     }
 }

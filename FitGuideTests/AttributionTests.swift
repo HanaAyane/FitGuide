@@ -28,4 +28,29 @@ final class AttributionTests: XCTestCase {
     func testAttributionFooterConstantHasSourceLink() {
         XCTAssertTrue(Exercise.gymVisualAttribution.contains("https://gymvisual.com/"))
     }
+
+    func testWorkoutGuideKeepsAttributionPathReachable() throws {
+        let repositoryRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let detailSource = try String(
+            contentsOf: repositoryRoot
+                .appendingPathComponent("FitGuide/Views/Detail/ExerciseDetailView.swift"),
+            encoding: .utf8
+        )
+        let workoutSource = try String(
+            contentsOf: repositoryRoot
+                .appendingPathComponent("FitGuide/Views/Plans/WorkoutSessionView.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(
+            detailSource.contains("AttributionFooter"),
+            "Exercise details must keep the Gym visual attribution footer."
+        )
+        XCTAssertTrue(
+            workoutSource.contains("ExerciseDetailView(exercise:"),
+            "Workout guide must reuse the attributed exercise detail view."
+        )
+    }
 }

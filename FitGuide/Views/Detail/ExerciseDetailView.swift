@@ -4,7 +4,6 @@ struct ExerciseDetailView: View {
     let exercise: Exercise
     @EnvironmentObject var library: LibraryStore
     @EnvironmentObject var store: ExerciseStore
-    @State private var showFavoriteSheet = false
     @State private var showShareSheet = false
     @State private var showPlanPicker = false
     @State private var copied = false
@@ -47,12 +46,6 @@ struct ExerciseDetailView: View {
                             .foregroundColor(.textPrimary)
                     }
                     Button {
-                        showFavoriteSheet.toggle()
-                    } label: {
-                        Image(systemName: library.isFavoritedAnywhere(exerciseId: exercise.id) ? "bookmark.fill" : "bookmark")
-                            .foregroundColor(library.isFavoritedAnywhere(exerciseId: exercise.id) ? Color.accentColor : .textPrimary)
-                    }
-                    Button {
                         showPlanPicker.toggle()
                     } label: {
                         Image(systemName: "list.bullet.rectangle")
@@ -63,9 +56,6 @@ struct ExerciseDetailView: View {
         }
         .onAppear {
             library.recordRecent(exerciseId: exercise.id)
-        }
-        .sheet(isPresented: $showFavoriteSheet) {
-            FavoritePickerSheet(exerciseId: exercise.id)
         }
         .sheet(isPresented: $showShareSheet) {
             ShareSheet(exercise: exercise)
